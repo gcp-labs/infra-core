@@ -1,0 +1,11 @@
+project_id        = "gcp-labs-core-495514"
+region            = "us-central1"
+zone              = "us-central1-a"
+network_name      = "infra-vpc-terraform"
+subnet_name       = "subnet-backend-tf"
+subnet_cidr_range = "10.0.1.0/24"
+firewall_name     = "allow-ssh-tf"
+ssh_source_ranges = ["0.0.0.0/0"]
+vm_name           = "lab-app-server"
+machine_type      = "e2-micro"
+image             = "debian-cloud/debian-12"

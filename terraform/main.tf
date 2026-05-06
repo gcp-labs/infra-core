@@ -1,32 +1,25 @@
 # Provider Configuration
 provider "google" {
-  project = "gcp-labs-core-495514" # Use your Project ID here
-  region  = "us-central1"
+  project = var.project_id
+  region  = var.region
 }
 
-# 1. Create the VPC
-resource "google_compute_network" "infra_vpc" {
-  name                    = "infra-vpc-terraform"
-  auto_create_subnetworks = false # This is equivalent to --subnet-mode=custom
+module "network" {
+  source            = "./modules/network"
+  region            = var.region
+  network_name      = var.network_name
+  subnet_name       = var.subnet_name
+  subnet_cidr_range = var.subnet_cidr_range
+  firewall_name     = var.firewall_name
+  ssh_source_ranges = var.ssh_source_ranges
 }
 
-# 2. Create the Subnet
-resource "google_compute_subnetwork" "subnet_backend" {
-  name          = "subnet-backend-tf"
-  ip_cidr_range = "10.0.1.0/24"
-  region        = "us-central1"
-  network       = google_compute_network.infra_vpc.id
-}
-
-# 3. Create the Firewall Rule
-resource "google_compute_firewall" "allow_ssh" {
-  name    = "allow-ssh-tf"
-  network = google_compute_network.infra_vpc.name
-
-  allow {
-    protocol = "tcp"
-    ports    = ["22"]
-  }
-
-  source_ranges = ["0.0.0.0/0"]
+module "vms" {
+  source        = "./modules/vms"
+  zone          = var.zone
+  vm_name       = var.vm_name
+  machine_type  = var.machine_type
+  image         = var.image
+  network_id    = module.network.network_id
+  subnetwork_id = module.network.subnetwork_id
 }
