@@ -3,3 +3,12 @@
 *.tfstate
 *.tfstate.backup
 .terraform.lock.hcl
+
+# Variables with real values ​​(do not commit — use the .example files as a reference)
+terraform.tfvars
+bootstrap/terraform.tfvars
+
+# GCP Credentials
+*.json
+credentials.json
+service-account*.json
