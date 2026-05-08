@@ -23,3 +23,10 @@ module "vms" {
   network_id    = module.network.network_id
   subnetwork_id = module.network.subnetwork_id
 }
+
+resource "google_artifact_registry_repository" "app_repo" {
+  location      = var.region
+  repository_id = var.artifact_repository_id
+  description   = var.artifact_repository_description
+  format        = "DOCKER"
+}

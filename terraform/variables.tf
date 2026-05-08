@@ -62,3 +62,15 @@ variable "image" {
   type        = string
   default     = "debian-cloud/debian-12"
 }
+
+variable "artifact_repository_id" {
+  description = "Artifact Registry repository ID for Docker images"
+  type        = string
+  default     = "arq-viewer-repo"
+}
+
+variable "artifact_repository_description" {
+  description = "Artifact Registry repository description"
+  type        = string
+  default     = "Docker repository for Arq-Viewer app"
+}

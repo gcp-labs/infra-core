@@ -9,3 +9,5 @@ ssh_source_ranges = ["0.0.0.0/0"]
 vm_name           = "lab-app-server"
 machine_type      = "e2-micro"
 image             = "debian-cloud/debian-12"
+artifact_repository_id          = "arq-viewer-repo"
+artifact_repository_description = "Docker repository for Arq-Viewer app"
